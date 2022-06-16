@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello !{% endblock %}
+
+{% block body %}
+<section class="col-lg-9 mx-auto m-1 py-5 px-3">
+    <h1>Home Page</h1>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4">
+                <div class="card mb-4" style="width: 18rem;">
+                    <img src="{{ asset('photos/' ~ product.image) }}" class="card-img-home" style="width: 100%; height: 12rem; object-fit: cover;"/>
+                    <div class="card-body">
+                        <h5 class="card-title h3">{{ product.name }}</h5>
+                        <div class="d-flex mb-2">
+                            <!-- Marque -->
+                            <p class="card-text me-2">Marque: <span class='fw-bold'>{{ product.marque }}</span></p>
+                        </div>
+                        <p class="card-text">Prix:
+                            <span class='fw-bold'>{{ product.prix }}€</span>
+                        </p>
+                        <p class="card-text">
+                            <span class="d-block fw-bold">Description: </span>
+                            {{ product.description|u.truncate(40, '...', false) }}
+                        </p>
+                        <a href="{{ path('app_product_show', {'id': product.id}) }}" class='btn btn-sm btn-dark'>voir details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

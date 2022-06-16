@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+<section class="col-11 mx-auto m-1 py-3 px-2">
+    <h1 class='text-muted'>Liste des commandes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adresse</th>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.adresse }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.dateCommande|date("m/d/Y") }}</td>
+                <td>{{ commande.totalCommande }}</td>
+                <td>{{ commande.statusLivraison ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

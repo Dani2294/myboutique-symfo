@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+
+<section class="col-lg-10 mx-auto m-1 py-5 px-3">
+    <h1 class='mb-4'>Panier</h1>
+    {% if panier|length > 0 %}
+        <div class="row justify-content-between">
+            <div class="col-md-7">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in panierProducts %}
+                        <tr>
+                            <td><img src="{{ asset('photos/' ~ item['product'].image) }}" style="width:60px;" alt=""></td>
+                            <td>{{ item['product'].name }}</td>
+                            <td>{{ item['product'].prix }}€</td>
+                            <td>
+                                <div class="btn-group">
+                                <a href="{{ path('app_delete_one_quantity', {'id': item['product'].id}) }}" class="btn btn-sm btn-outline-dark"><i class="fa-solid fa-minus"></i></a>
+                                <span class="btn btn-sm btn-outline-dark">{{ item.quantity }}</span>
+                                <a href="{{ path('app_add_to_cart', {'id': item['product'].id}) }}" class="btn btn-sm btn-outline-dark"><i class="fa-solid fa-plus"></i></a>
+                                </div>
+                            </td>
+                            <td>
+                                <a onclick="return confirm('Do you really want to delete this product from your cart?')" href="{{ path('app_delete_product', {'id': item['product'].id}) }}" class="btn btn-danger"><i class="fa fa-trash-can"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end">
+                    <a onclick="return confirm('Do you want to clear your cart?')" href="{{ path('app_delete_all_products') }}" class="btn btn-danger">Vider le panier</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Total</h2>
+                <div class="card">
+                    <div class="card-body bg-dark text-light">
+                        {% for item in panierProducts %}
+                            <p class="d-flex justify-content-between border-bottom">{{ item['product'].name }} : <span class="fw-bold">{{ item['product'].prix * item.quantity }}€</span></p>
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <p class="d-flex justify-content-between">
+                            Total à régler : <span class="fw-bold">{{ prixTotal }}€</span>
+                        </p>
+                        <div class="d-grid">
+                            <a href="{{ path('app_confirme_panier') }}" class="btn btn-primary mb-2">Confirmer mon panier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p class="h4 text-muted mb-3">Votre panier est vide...</p>
+        <a href="{{ path('app_home') }}" class="btn btn-dark">Back to home page</a>
+    {% endif %}
+</section>
+{% endblock %}
