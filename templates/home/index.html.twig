@@ -3,27 +3,46 @@
 {% block title %}Hello !{% endblock %}
 
 {% block body %}
-<section class="col-lg-9 mx-auto m-1 py-5 px-3">
-    <h1>Home Page</h1>
+<header class='banner text-center text-light'>
+    <h1>Welcome on My Boutique</h1>
+    <p class="h4">Found your next outfit here !</p>
+</header>
+<section class="col-lg-11 mx-auto m-1 py-5 px-3" id="shop">
+    <h2>Discover our best products</h2>
+    
+    <div class="py-2">
+        <div class="dropdown">
+            <button class="btn btn-outline dropdown-toggle border" type="button" id="dropdownMenuButton1"        data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+            </button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li class="dropdown-item"><a href="{{ path('app_home') }}#shop">Tout voir</a></li>
+                {% for category in categorys %}
+                <li class='dropdown-item'><a href="{{ path('app_filtre_product', {'id' : category.id}) }}" class="">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
     <div class="row">
         {% for product in products %}
-            <div class="col-md-4">
-                <div class="card mb-4" style="width: 18rem;">
-                    <img src="{{ asset('photos/' ~ product.image) }}" class="card-img-home" style="width: 100%; height: 12rem; object-fit: cover;"/>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card mb-4" style="width: 100%;">
+                    <img src="{{ asset('photos/' ~ product.image) }}" class="card-img-home" style="width: 100%; height: 22rem; object-fit: cover;"/>
                     <div class="card-body">
-                        <h5 class="card-title h3">{{ product.name }}</h5>
+                        <h4 class="card-title h4">{{ product.name }}</h4>
                         <div class="d-flex mb-2">
                             <!-- Marque -->
-                            <p class="card-text me-2">Marque: <span class='fw-bold'>{{ product.marque }}</span></p>
+                            <p class="card-text me-2 fs-6">Marque: <span class='fw-bold'>{{ product.marque }}</span></p>
                         </div>
                         <p class="card-text">Prix:
                             <span class='fw-bold'>{{ product.prix }}€</span>
                         </p>
                         <p class="card-text">
-                            <span class="d-block fw-bold">Description: </span>
+                            <span class="d-block fw-bold fs-6">Description: </span>
                             {{ product.description|u.truncate(40, '...', false) }}
                         </p>
-                        <a href="{{ path('app_product_show', {'id': product.id}) }}" class='btn btn-sm btn-dark'>voir details</a>
+                        <a href="{{ path('app_product_show', {'id': product.id}) }}" class='btn btn-sm btn-dark' title="voir details"><i class="fa-solid fa-eye"></i> Voir details</a>
                     </div>
                 </div>
             </div>

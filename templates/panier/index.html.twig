@@ -42,6 +42,7 @@
                 <div class="d-flex justify-content-end">
                     <a onclick="return confirm('Do you want to clear your cart?')" href="{{ path('app_delete_all_products') }}" class="btn btn-danger">Vider le panier</a>
                 </div>
+                <a href="{{ path('app_home') }}#shop" class="btn btn-dark">Continuer mes achats</a>
             </div>
             <div class="col-md-4">
                 <h2>Total</h2>
@@ -56,7 +57,7 @@
                             Total à régler : <span class="fw-bold">{{ prixTotal }}€</span>
                         </p>
                         <div class="d-grid">
-                            <a href="{{ path('app_confirme_panier') }}" class="btn btn-primary mb-2">Confirmer mon panier</a>
+                            <a href="{{ path('app_payement') }}" class="btn btn-primary mb-2">Confirmer mon panier</a>
                         </div>
                     </div>
                 </div>

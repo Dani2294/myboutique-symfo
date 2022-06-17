@@ -6,7 +6,12 @@
 <section class="col-11 mx-auto m-1 py-3 px-2">
     <h1 class='text-muted'>Liste des commandes</h1>
 
-    <table class="table">
+    <div class='my-3'>
+        <a href="{{ path('app_commande_index', {'param': 1}) }}" class="btn btn-success">Voir commandes livrés</a>
+        <a href="{{ path('app_commande_index', {'param': 0}) }}" class="btn btn-warning">Voir commandes non livrés</a>
+    </div>
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
@@ -14,8 +19,8 @@
                 <th>Nom</th>
                 <th>Date</th>
                 <th>Total</th>
-                <th>Status</th>
-                <th>actions</th>
+                <th>Status livraison</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +33,7 @@
                 <td>{{ commande.totalCommande }}</td>
                 <td>{{ commande.statusLivraison ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}">show</a>
+                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}" class='btn btn-dark btn-sm'><i class="fa-solid fa-eye"></i></a>
                 </td>
             </tr>
         {% else %}

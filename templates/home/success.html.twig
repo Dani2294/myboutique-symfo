@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Success !{% endblock %}
+
+{% block body %}
+<section class="col-lg-9 mx-auto m-1 py-5 px-3">
+    <h1>Votre payement a été validé !</h1>
+
+    <h3 class='h3'>Voici un résumé de votre commande:</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nom</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Quantité</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in articlesAchete %}
+            <tr>
+                <td><img src="{{ asset('photos/' ~ item['product'].image) }}" style="width:60px;" alt=""></td>
+                <td>{{ item['product'].name }}</td>
+                <td>{{ item['product'].marque }}</td>
+                <td>x{{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total</td>
+                <td>{{ total }}€</td>
+            </tr>
+        </tfoot>
+    </table>
+    <a href="{{ path('app_home') }}#shop" class="btn btn-dark">Continuer mes achats</a>
+</section>
+{% endblock %}

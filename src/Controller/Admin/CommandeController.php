@@ -13,11 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/commande')]
 class CommandeController extends AbstractController
 {
-    #[Route('/', name: 'app_commande_index', methods: ['GET'])]
-    public function index(CommandeRepository $commandeRepository): Response
+    #[Route('/voir-commandes/{param?}', name: 'app_commande_index', methods: ['GET'])]
+    public function index(CommandeRepository $commandeRepository, $param): Response
     {
+        if ($param != null) {
+            $commandes = $commandeRepository->findBy(['status_livraison' => $param]);
+        } else {
+            $commandes = $commandeRepository->findAll();
+        }
         return $this->render('commande/index.html.twig', [
-            'commandes' => $commandeRepository->findAll(),
+            'commandes' => $commandes,
         ]);
     }
 
@@ -74,5 +79,17 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/modifier-status/{id}', name: 'app_change_status_commande', methods: ['GET'])]
+    public function changeStatus(Commande $commande, CommandeRepository $commandeRepository): Response
+    {
+        // Changement du status de la commande
+        $commande->setStatusLivraison(true);
+        // Envoi à la BdD pour mise à jour
+        $commandeRepository->add($commande, true);
+        // Redirection vers la show "detail" de la commande
+        return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()]);
     }
 }

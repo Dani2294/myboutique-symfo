@@ -16,7 +16,7 @@
             <p>{{ product.marque }}</p>
             <p><span class='fw-bold'>Description:</span> <br>{{ product.description }}</p>
             <p><span class='fw-bold'>Prix:</span> <br>{{ product.prix }}€</p>
-            <a href="{{ path('app_add_to_cart', {'id': product.id}) }}" class='btn btn-lg btn-success'>Add to cart</a>
+            <a href="{{ path('app_add_to_cart', {'id': product.id}) }}" class='btn btn-lg btn-primary'>Add to cart</a>
         </div>
     </div>
 </section>

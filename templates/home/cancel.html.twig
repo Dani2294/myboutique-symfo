@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cancel !{% endblock %}
+
+{% block body %}
+<section class="col-lg-9 mx-auto m-1 py-5 px-3">
+    <h1>Il y a eu une erreur lors de votre payement ! Merci de recommencer le processus depuis votre panier</h1>
+
+     <a class="btn btn-dark" aria-current="page" href="{{ path('app_panier')  }}">Rtourner sur mon panier</a>
+    </div>
+</section>
+{% endblock %}

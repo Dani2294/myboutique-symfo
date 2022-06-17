@@ -6,7 +6,13 @@
 <section class="col-lg-8 mx-auto m-1 py-3 px-2">
     <a href="{{ path('app_commande_index') }}" class="btn btn-dark"><i class="fa-solid fa-arrow-left"></i> back to commandes list</a>
     <h1 class="py-3" >{{ commande.nom }}</h1>
-
+    <div class='mb-3'>
+        {% if not commande.statusLivraison %}
+            <a href="{{ path('app_change_status_commande', {'id' : commande.id}) }}" class="btn btn-primary btn-sm">Marqué comme livrée</a>
+        {% else %}
+            <p class="text-success">Commande Livrée <i class="fa-solid fa-circle-check"></i></p>
+        {% endif %}
+    </div>
     <table class="table">
         <tbody>
             <tr>
@@ -27,12 +33,12 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ commande.statusLivraison ? 'Yes' : 'No' }}</td>
+                <td>{{ commande.statusLivraison ? 'Livrée' : 'Non Livrée' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="container mt-5">
+    <div class="mt-5">
         <h4>Detail commande</h4>
         <table class="table table-striped">
             <thead>

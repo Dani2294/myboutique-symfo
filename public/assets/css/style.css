@@ -1,0 +1,26 @@
+.banner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	background: url("https://lp2.hm.com/hmgoepprod?source=url[https://www2.hm.com/content/dam/Hm_Member_and_Loyalty/campaigns/8035-benefit-awareness/house-of-members/8035-1x1-Early%20Access-house-of-members.jpg]&scale=size[960]&sink=format[jpeg],quality[80]")
+		no-repeat center center/cover;
+	height: 100%;
+	padding: 180px 2rem;
+}
+
+.banner::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 1;
+}
+
+.banner > * {
+	z-index: 2;
+	width: 100%;
+}

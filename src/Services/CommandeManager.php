@@ -6,7 +6,6 @@ use App\Entity\Commande;
 use App\Entity\DetailCommande;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommandeManager
 {
@@ -41,7 +40,7 @@ class CommandeManager
         $commande->setAdresse($user->getAdress() . ' ' . $user->getCity() . ' ' . $user->getPostalCode());
 
         // je rajoute la date de la commande
-        $commande->setDateCommande(new \DateTime());
+        $commande->setDateCommande(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
 
         // je rajoute le total de la commande
         $commande->setTotalCommande($panier->getPrixTotal());

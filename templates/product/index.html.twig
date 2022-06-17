@@ -3,13 +3,13 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-<section class="col-12 mx-auto m-1 py-3 px-2">
+<section class="col-11 mx-auto m-1 py-3 px-2">
     <div class="d-flex justify-content-between align-items-center py-4 px-sm-3">
         <h1 class='text-muted'>Liste des produit</h1>
          <a href="{{ path('app_product_new') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i> Add new</a>
     </div>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Image</th>
@@ -19,7 +19,7 @@
                 <th>Description</th>
                 <th>Prix</th>
                 <th>Quantity</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -33,8 +33,8 @@
                 <td>{{ product.prix }}€</td>
                 <td>{{ product.quantity }}</td>
                 <td>
-                    <a href="{{ path('app_product_show_back', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                    <a href="{{ path('app_product_show_back', {'id': product.id}) }}" class='btn btn-dark btn-sm'><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class='btn btn-primary btn-sm'><i class="fa-solid fa-pen"></i></a>
                 </td>
             </tr>
         {% else %}
